@@ -17,6 +17,7 @@ const page = async () => {
     <>
       <div className="flex flex-col gap-10 items-start  w-full mt-10">
         <h1>Welcome back, {session?.user?.name}!</h1>
+        <LogoutButton />
         <div>
           <Suspense fallback={<span>Loading...</span>}>
             <ProfileSummary session={session} />

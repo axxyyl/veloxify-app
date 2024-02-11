@@ -20,7 +20,7 @@ const LoginForm = () => {
               name="email"
               autoComplete="off"
               placeholder="Enter username / email"
-              className="border-none focus:border-none outline-none rounded-md p-1 text-sm"
+              className="w-full border-none focus:border-none outline-none rounded-md p-1 text-sm"
             />
           </div>
         </div>
@@ -33,7 +33,7 @@ const LoginForm = () => {
               required
               autoComplete="off"
               placeholder="Enter password"
-              className="border-none focus:border-none outline-none rounded-md p-1 text-sm"
+              className="w-full border-none focus:border-none outline-none rounded-md p-1 text-sm"
             />
           </div>
         </div>

@@ -2,7 +2,11 @@
 import { signOut } from "@/auth";
 
 const LogoutButton = () => {
-  return <button onClick={() => signOut()}>Logoit</button>;
+  return (
+    <button className="text-blue-600" onClick={() => signOut()}>
+      Logout
+    </button>
+  );
 };
 
 export default LogoutButton;

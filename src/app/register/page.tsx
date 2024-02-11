@@ -15,9 +15,9 @@ export default function RegisterPage() {
           <RegisterForm />
           <div>
             <span className="text-gray-800">
-              Don{`'`}t have an account?{" "}
-              <Link href="/register" className="text-blue-500 font-bold">
-                Sign Up
+              Already have an account?{" "}
+              <Link href="/login" className="text-blue-500 font-bold">
+                Sign In
               </Link>
             </span>
           </div>
