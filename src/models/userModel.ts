@@ -3,9 +3,10 @@ import { unique } from "next/dist/build/utils";
 import { Social } from "@/types";
 export interface IUser {
   username: string;
-  fullName: string;
+  name: string;
   email: string;
   avatar?: string;
+  bio?: string | null;
   password: string;
   socials?: Social[];
 }
@@ -22,7 +23,7 @@ const userSchema = new mongoose.Schema<IUserDocument>(
       unique: true,
     },
 
-    fullName: {
+    name: {
       type: String,
       required: true,
     },
@@ -38,6 +39,10 @@ const userSchema = new mongoose.Schema<IUserDocument>(
     password: {
       type: String,
       required: true,
+    },
+    bio: {
+      type: String,
+      default: null,
     },
     socials: {
       type: Array,

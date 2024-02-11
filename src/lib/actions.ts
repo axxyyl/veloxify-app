@@ -4,9 +4,11 @@ import { z } from "zod";
 import { connectToMongoDB } from "./db";
 import User from "@/models/userModel";
 import { AuthError } from "next-auth";
+import email from "next-auth/providers/email";
+import { error } from "console";
 
 const schema = z.object({
-  fullName: z
+  name: z
     .string()
     .min(4, { message: "Name must be at least 4 characters long" }),
   password: z
@@ -31,10 +33,10 @@ const schema = z.object({
 
 export const registerUser = async (prevState: any, formData: FormData) => {
   const validatedFields: any = schema.safeParse({
-    fullName: formData.get("fullName"),
     email: formData.get("email"),
     username: formData.get("username"),
     password: formData.get("password"),
+    name: formData.get("name"),
   });
 
   if (!validatedFields.success) {
@@ -72,12 +74,14 @@ export const registerUser = async (prevState: any, formData: FormData) => {
     username: formData.get("username"),
     password: formData.get("password"),
     email: formData.get("email"),
-    fullName: formData.get("fullName"),
+    name: formData.get("name"),
   });
-
   await newUser.save();
-
-  //   signIn();
+  console.log("dsa");
+  await signIn("credentials", {
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
 };
 
 export async function authenticate(

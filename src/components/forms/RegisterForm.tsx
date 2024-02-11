@@ -25,11 +25,10 @@ const RegisterForm = () => {
             <UserIcon />
             <input
               type="text"
-              //   required
-              name="fullName"
-              autoComplete="off"
+              required
+              name="name"
               placeholder="Full Name"
-              className="border-none focus:border-none outline-none rounded-md p-1 text-sm"
+              className="w-full border-none focus:border-none outline-none rounded-md p-1 text-sm"
             />
           </div>
         </div>
@@ -47,7 +46,7 @@ const RegisterForm = () => {
               name="username"
               autoComplete="off"
               placeholder="Username"
-              className="border-none focus:border-none outline-none rounded-md p-1 text-sm"
+              className="w-full border-none focus:border-none outline-none rounded-md p-1 text-sm"
             />
           </div>
         </div>
@@ -65,7 +64,7 @@ const RegisterForm = () => {
               name="email"
               autoComplete="off"
               placeholder="Email"
-              className="border-none focus:border-none outline-none rounded-md p-1 text-sm"
+              className="w-full border-none focus:border-none outline-none rounded-md p-1 text-sm"
             />
           </div>
         </div>
@@ -83,7 +82,7 @@ const RegisterForm = () => {
               //   required
               autoComplete="off"
               placeholder="Enter password"
-              className="border-none focus:border-none outline-none rounded-md p-1 text-sm"
+              className="w-full border-none focus:border-none outline-none rounded-md p-1 text-sm"
             />
           </div>
         </div>

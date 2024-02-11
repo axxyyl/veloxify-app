@@ -20,7 +20,7 @@ export const { auth, signIn, signOut } = NextAuth({
 
         if (found) {
           const user = {
-            name: found?.fullName,
+            name: found?.name,
             email: found?.email,
             image: found?.avatar,
           };
