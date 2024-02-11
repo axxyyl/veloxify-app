@@ -4,11 +4,12 @@ import logo from "../../../public/logo.png";
 import LinkIcon from "../icons/LinkIcon";
 import FolderIcon from "../icons/FolderIcon";
 import { auth } from "@/auth";
+import AvatarIcon from "./AvatarIcon";
 const Navbar = async () => {
   const session = await auth();
   return (
     <>
-      <nav className="border border-slate-200  rounded-full w-full p-3 flex justify-between gap-4">
+      <nav className="border border-slate-200  rounded-md md:rounded-full w-full p-1 px-2 md:p-3 flex justify-between gap-4">
         <div className="flex gap-8 items-center">
           <Link
             className="font-bold  font-mono text-black text-xl flex flex-row gap-2"
@@ -40,11 +41,12 @@ const Navbar = async () => {
             <span className="text-sm font-semibold text-slate-600">Links</span>
           </Link>
         </div>
-        <div>
+        <Link
+          href="/app/account"
+          className="w-10 h-10 overflow-hidden rounded-full hover:border border-gray-600 p-1"
+        >
           {session?.user?.image === "" ? (
-            <p className="bg-black w-10 h-10 rounded-full text-white flex items-center justify-center text-xl">
-              {session?.user?.name ? session.user.name[0] : ""}
-            </p>
+            <AvatarIcon name={session?.user?.name} />
           ) : (
             <Image
               width={15}
@@ -55,7 +57,7 @@ const Navbar = async () => {
               className="rounded-full w-10 h-10"
             />
           )}
-        </div>
+        </Link>
       </nav>
     </>
   );

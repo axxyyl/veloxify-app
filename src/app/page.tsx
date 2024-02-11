@@ -26,7 +26,7 @@ export default async function Home() {
   // }
 
   return (
-    <main className="flex min-h-screen flex-col relative p-10 container  mx-auto ">
+    <main className="flex min-h-screen flex-col relative p-5 container  mx-auto ">
       <div className="absolute right-2 top-0 opacity-[0.7] -z-10">
         <PatternBackground />
       </div>
