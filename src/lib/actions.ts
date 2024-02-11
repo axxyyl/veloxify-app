@@ -1,0 +1,100 @@
+"use server";
+import { signIn } from "@/auth";
+import { z } from "zod";
+import { connectToMongoDB } from "./db";
+import User from "@/models/userModel";
+import { AuthError } from "next-auth";
+
+const schema = z.object({
+  fullName: z
+    .string()
+    .min(4, { message: "Name must be at least 4 characters long" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long" })
+    .regex(/[0-9]/, { message: "Password must contain at least one number" })
+    .regex(/[A-Z]/, {
+      message: "Password must contain at least one uppercase letter",
+    })
+    .regex(/[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?/~`\-|=\\'"\\]*/, {
+      message: "Password must contain at least one special character",
+    }),
+  email: z.string().email({}),
+  username: z
+    .string()
+    .min(3, { message: "Username must be at least 3 characters long" })
+    .max(20, { message: "Username cannot be more than 20 characters long" })
+    .regex(/^[a-zA-Z0-9_]+$/, {
+      message: "Username can only contain letters, numbers, and underscores",
+    }),
+});
+
+export const registerUser = async (prevState: any, formData: FormData) => {
+  const validatedFields: any = schema.safeParse({
+    fullName: formData.get("fullName"),
+    email: formData.get("email"),
+    username: formData.get("username"),
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      message: "Fail",
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+  await connectToMongoDB();
+
+  const existUsername = await User.findOne({
+    username: formData.get("username"),
+  });
+
+  if (existUsername)
+    return {
+      message: "fail",
+      errors: {
+        username: ["User already Exist"],
+      },
+    };
+
+  const existEmail = await User.findOne({
+    email: formData.get("email"),
+  });
+
+  if (existEmail)
+    return {
+      message: "fail",
+      errors: {
+        email: ["Email address already Exist"],
+      },
+    };
+  const newUser = await User.create({
+    username: formData.get("username"),
+    password: formData.get("password"),
+    email: formData.get("email"),
+    fullName: formData.get("fullName"),
+  });
+
+  await newUser.save();
+
+  //   signIn();
+};
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+    throw error;
+  }
+}
