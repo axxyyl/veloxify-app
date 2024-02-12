@@ -1,5 +1,4 @@
 import mongoose, { Model } from "mongoose";
-import { unique } from "next/dist/build/utils";
 import { Social } from "@/types";
 export interface IUser {
   username: string;

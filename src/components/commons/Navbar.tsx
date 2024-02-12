@@ -25,16 +25,12 @@ const Navbar = async () => {
               className=""
             />
           </Link>
-          <NavLink name="Links" Icon={<LinkIcon />} />
-          <Link
-            className="  flex flex-row gap-1 items-center hover:bg-gray-200  p-1 rounded-md duration-300 transition-all"
-            href="/app/categories"
-          >
-            <FolderIcon />
-            <span className="text-sm font-semibold text-slate-600">
-              Categories
-            </span>
-          </Link>
+          <NavLink name="Links" url="/app/links" Icon={<LinkIcon />} />
+          <NavLink
+            name="Categories"
+            url="/app/categories"
+            Icon={<FolderIcon />}
+          />
         </div>
         <Link
           href="/app/account"

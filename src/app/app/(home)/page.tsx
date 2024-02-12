@@ -1,18 +1,10 @@
 import { auth } from "@/auth";
 import React, { Suspense } from "react";
-import Image from "next/image";
-import { signOut } from "@/auth";
 import LogoutButton from "@/components/LogoutButton";
-import { connectToMongoDB } from "@/lib/db";
-import User from "@/models/userModel";
-import Navbar from "@/components/commons/Navbar";
-import AvatarIcon from "@/components/commons/AvatarIcon";
-import Link from "next/link";
-import ProfileSummary from "@/components/app/ProfileSummary";
+import ProfileSummary from "@/sections/ProfileSummary";
+import CategorySection from "@/sections/Category";
 const page = async () => {
   const session = await auth();
-  await connectToMongoDB();
-
   return (
     <>
       <div className="flex flex-col gap-10 items-start  w-full mt-10">
@@ -25,7 +17,7 @@ const page = async () => {
         </div>
         <div>
           <Suspense fallback={<span>Loading...</span>}>
-            <ProfileSummary session={session} />
+            <CategorySection session={session} />
           </Suspense>
         </div>
       </div>

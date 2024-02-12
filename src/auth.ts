@@ -5,7 +5,6 @@ import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
 import { connectToMongoDB } from "./lib/db";
 import User from "./models/userModel";
-
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
@@ -21,9 +20,11 @@ export const { auth, signIn, signOut } = NextAuth({
         if (found) {
           const user = {
             name: found?.name,
+            password: "",
             email: found?.email,
             image: found?.avatar,
           };
+
           return user;
         }
 
@@ -31,4 +32,18 @@ export const { auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token }) {
+      return token;
+    },
+
+    async session({ session, token }) {
+      session.userId = token.sub as string;
+      return session;
+    },
+  },
 });
