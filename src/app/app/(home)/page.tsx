@@ -1,7 +1,7 @@
-import { auth } from "../../../auth";
+import { auth } from "@/auth";
 import React, { Suspense } from "react";
 import Image from "next/image";
-import { signOut } from "../../../auth";
+import { signOut } from "@/auth";
 import LogoutButton from "@/components/LogoutButton";
 import { connectToMongoDB } from "@/lib/db";
 import User from "@/models/userModel";
@@ -18,6 +18,11 @@ const page = async () => {
       <div className="flex flex-col gap-10 items-start  w-full mt-10">
         <h1>Welcome back, {session?.user?.name}!</h1>
         <LogoutButton />
+        <div>
+          <Suspense fallback={<span>Loading...</span>}>
+            <ProfileSummary session={session} />
+          </Suspense>
+        </div>
         <div>
           <Suspense fallback={<span>Loading...</span>}>
             <ProfileSummary session={session} />

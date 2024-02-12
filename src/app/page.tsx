@@ -3,28 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
 import GithubIcon from "@/components/icons/GithubIcon";
-import StarIcon from "@/components/icons/StarIcon";
-import { connectToMongoDB } from "@/lib/db";
-import User from "@/models/userModel";
 
 export default async function Home() {
-  // console.log("connecting");
-  // await connectToMongoDB();
-
-  // const exist = await User.findOne({
-  //   username: "test",
-  // });
-  // if (!exist) {
-  //   const newUser = await User.create({
-  //     username: "test",
-  //     password: "test",
-  //     email: "test",
-  //     fullName: "test test",
-  //   });
-
-  //   await newUser.save();
-  // }
-
   return (
     <main className="flex min-h-screen flex-col relative p-5 container  mx-auto ">
       <div className="absolute right-2 top-0 opacity-[0.7] -z-10">
@@ -72,7 +52,7 @@ export default async function Home() {
             </Link>
             <Link
               target="_blank"
-              href="https://github.com/axxyyl/veloxify"
+              href="https://github.com/xaenic/veloxify"
               className="bg-black text-white p-2 text-sm rounded-md  px-2 flex items-center gap-1 hover:bg-gray-800 duration-200 transition-colors"
             >
               <GithubIcon />

@@ -5,6 +5,7 @@ import LinkIcon from "../icons/LinkIcon";
 import FolderIcon from "../icons/FolderIcon";
 import { auth } from "@/auth";
 import AvatarIcon from "./AvatarIcon";
+import { NavLink } from "./NavLink";
 const Navbar = async () => {
   const session = await auth();
   return (
@@ -24,6 +25,7 @@ const Navbar = async () => {
               className=""
             />
           </Link>
+          <NavLink name="Links" Icon={<LinkIcon />} />
           <Link
             className="  flex flex-row gap-1 items-center hover:bg-gray-200  p-1 rounded-md duration-300 transition-all"
             href="/app/categories"
@@ -32,13 +34,6 @@ const Navbar = async () => {
             <span className="text-sm font-semibold text-slate-600">
               Categories
             </span>
-          </Link>
-          <Link
-            className="  flex flex-row gap-1 items-center hover:bg-gray-200  p-1 rounded-md duration-300 transition-all"
-            href="/app/links"
-          >
-            <LinkIcon />
-            <span className="text-sm font-semibold text-slate-600">Links</span>
           </Link>
         </div>
         <Link
