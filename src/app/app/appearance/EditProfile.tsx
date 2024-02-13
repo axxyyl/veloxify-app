@@ -1,6 +1,8 @@
 "use client";
 
 import AvatarIcon from "@/components/commons/AvatarIcon";
+import AddIcon from "@/components/icons/AddIcon";
+import GithubIcon from "@/components/icons/GithubIcon";
 import { IUser } from "@/models/userModel";
 import { Session } from "next-auth";
 import Image from "next/image";
@@ -45,7 +47,7 @@ const EditProfile = ({
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <div className="group group-focus:border-black border bg-slate-200 flex flex-col px-2 p-2 rounded-xl">
+            <div className="group group-focus:border-black border bg-gray-200 flex flex-col px-2 p-2 rounded-xl">
               <span className="text-xs text-slate-600">
                 Profile Display Name
               </span>
@@ -59,7 +61,7 @@ const EditProfile = ({
                 />
               </div>
             </div>
-            <div className="group group-focus:border-black border bg-slate-200 flex flex-col px-2 p-2 rounded-xl">
+            <div className="group group-focus:border-black border bg-gray-200 flex flex-col px-2 p-2 rounded-xl">
               <span className="text-xs text-slate-600">Bio</span>
               <div className="flex">
                 <span
@@ -90,6 +92,18 @@ const EditProfile = ({
                     />
                   </div>
                 </>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4">
+              <div>
+                <h1>Socials</h1>
+                <div>
+                  <GithubIcon />
+                </div>
+              </div>
+              <div className="cursor-pointer hover:bg-gray-200 rounded-xl duration-300 transition-colors w-full flex justify-center border border-gray-200 items-center">
+                <AddIcon />
+                <span className=" p-3 rounded-xl ">Add a Social</span>
               </div>
             </div>
           </div>
