@@ -19,7 +19,7 @@ const EditProfile = ({
   const [bio, setBio] = useState(user?.bio || "Add");
   return (
     <div>
-      <h1>Profile</h1>
+      <h1 className="text-xl font-bold mt-10 mb-5">Profile</h1>
       <div className="rounded-lg border border-gray-200 p-10">
         <form className="flex flex-col gap-5">
           <div className="flex items-center gap-4">
@@ -48,9 +48,7 @@ const EditProfile = ({
           </div>
           <div className="flex flex-col gap-5">
             <div className="group group-focus:border-black border bg-gray-200 flex flex-col px-2 p-2 rounded-xl">
-              <span className="text-xs text-slate-600">
-                Profile Display Name
-              </span>
+              <span className="text-xs text-slate-600">Username</span>
               <div className="flex">
                 <span className="text-xs">@</span>
                 <input
