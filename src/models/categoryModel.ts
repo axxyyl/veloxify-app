@@ -1,7 +1,7 @@
 import mongoose, { Model } from "mongoose";
 import { Social } from "@/types";
 export interface ICategory {
-  username: string;
+  email: string;
   title: string;
   items?: [];
 }
@@ -12,7 +12,7 @@ export interface ICategoryDocument extends ICategory, Document {
 }
 const categorySchema = new mongoose.Schema<ICategoryDocument>(
   {
-    username: {
+    email: {
       type: String,
       required: true,
       unique: true,
