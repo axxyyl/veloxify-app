@@ -25,11 +25,10 @@ const Navbar = async () => {
               className=""
             />
           </Link>
-          <NavLink name="Links" url="/app/links" Icon={<LinkIcon />} />
           <NavLink
-            name="Categories"
-            url="/app/categories"
-            Icon={<FolderIcon />}
+            name="Appearance"
+            url="/app/appearance"
+            Icon={<LinkIcon />}
           />
         </div>
         <Link
