@@ -1,16 +1,16 @@
 import mongoose, { Model } from "mongoose";
 import { array } from "zod";
-export interface ICategory {
+export interface ITab {
   email: string;
   name: string;
   collections?: [];
 }
 
-export interface ICategoryDocument extends ICategory, Document {
+export interface ITabDocument extends ITab, Document {
   createdAt: Date;
   updatedAt: Date;
 }
-const categorySchema = new mongoose.Schema<ICategoryDocument>(
+const tabSchema = new mongoose.Schema<ITabDocument>(
   {
     name: {
       type: String,
@@ -32,7 +32,7 @@ const categorySchema = new mongoose.Schema<ICategoryDocument>(
   }
 );
 
-const Category: Model<ICategoryDocument> =
-  mongoose.models.Category || mongoose.model("Category", categorySchema);
+const Tab: Model<ITabDocument> =
+  mongoose.models.Tab || mongoose.model("Tab", tabSchema);
 
-export default Category;
+export default Tab;
