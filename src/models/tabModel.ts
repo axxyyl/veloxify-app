@@ -3,7 +3,7 @@ import { array } from "zod";
 export interface ITab {
   email: string;
   name: string;
-  collections?: [];
+  categories?: [];
 }
 
 export interface ITabDocument extends ITab, Document {
@@ -21,8 +21,7 @@ const tabSchema = new mongoose.Schema<ITabDocument>(
       required: true,
       unique: true,
     },
-
-    collections: {
+    categories: {
       type: Array,
       default: [],
     },
