@@ -1,9 +1,12 @@
 import mongoose, { Model } from "mongoose";
 import { array } from "zod";
+import { IItem } from "./itemModel";
 export interface ITab {
   email: string;
+  enabled: boolean;
   name: string;
-  categories?: [];
+  clicks: number;
+  items?: IItem[];
 }
 
 export interface ITabDocument extends ITab, Document {
@@ -16,12 +19,20 @@ const tabSchema = new mongoose.Schema<ITabDocument>(
       type: String,
       required: true,
     },
+    enabled: {
+      type: Boolean,
+      default: true,
+    },
     email: {
       type: String,
       required: true,
       unique: true,
     },
-    categories: {
+    clicks: {
+      type: Number,
+      default: 0,
+    },
+    items: {
       type: Array,
       default: [],
     },
