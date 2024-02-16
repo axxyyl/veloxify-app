@@ -4,8 +4,11 @@ import DragIcon from "@/components/icons/DragIcon";
 import PlusIcon from "@/components/icons/PlusIcon";
 import { ITab } from "@/models/tabModel";
 import { useState } from "react";
+import { useFormState } from "react-dom";
 const AddTab = ({ tabs }: { tabs: any }) => {
   const [active, setActive] = useState(false);
+
+  // const [state, formAction] = useFormState()
   return (
     <>
       <div className="relative mb-10">
@@ -28,7 +31,7 @@ const AddTab = ({ tabs }: { tabs: any }) => {
           </div>
           <div
             className={`h-0 overflow-hidden ${
-              active ? "h-72" : "h-0"
+              active ? "h-[300px]" : "h-0"
             } duration-200 transition-all`}
           >
             <form className="border border-gray-200 p-5 flex flex-col gap-4 rounded-md">
