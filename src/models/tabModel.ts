@@ -5,7 +5,9 @@ export interface ITab {
   email: string;
   enabled: boolean;
   name: string;
+  description: string;
   clicks: number;
+  position: number;
   items?: IItem[];
 }
 
@@ -16,6 +18,14 @@ export interface ITabDocument extends ITab, Document {
 const tabSchema = new mongoose.Schema<ITabDocument>(
   {
     name: {
+      type: String,
+      required: true,
+    },
+    position: {
+      type: Number,
+      default: 0,
+    },
+    description: {
       type: String,
       required: true,
     },
