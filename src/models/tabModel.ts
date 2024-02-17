@@ -1,7 +1,8 @@
 import mongoose, { Model } from "mongoose";
 import { array } from "zod";
-import { IItem } from "./itemModel";
+import { IItem, itemSchema } from "./itemModel";
 export interface ITab {
+  _id: Object;
   email: string;
   enabled: boolean;
   name: string;
@@ -44,7 +45,7 @@ const tabSchema = new mongoose.Schema<ITabDocument>(
     },
     items: {
       type: Array,
-      default: [],
+      default: [itemSchema],
     },
   },
   {

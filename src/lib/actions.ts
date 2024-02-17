@@ -32,6 +32,18 @@ const schema = z.object({
     }),
 });
 
+const itemValidation = z.object({
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+  image: z.string().url({ message: "Invalid image URL" }), // Validate as a URL
+  description: z.string(),
+  external_link: z.string().url({
+    message: "Invalid url",
+  }),
+  price: z.number(),
+  type: z.string(),
+});
 export const registerUser = async (prevState: any, formData: FormData) => {
   const validatedFields: any = schema.safeParse({
     email: formData.get("email"),
@@ -114,6 +126,29 @@ export const addTab = async (prevState: any, formData: FormData) => {
     error: [],
   };
 };
+
+export async function AddItem(prevState: any, formData: FormData) {
+  await connectToMongoDB();
+  const validatedFields: any = itemValidation.safeParse({
+    name: formData.get("name"),
+    image: formData.get("image"),
+    description: formData.get("description"),
+    external_link: formData.get("external_link"),
+    price: formData.get("price"),
+    type: formData.get("type"),
+  });
+  if (!validatedFields.success) {
+    return {
+      message: "Fail",
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  return {
+    message: "Success",
+    error: [],
+  };
+}
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData

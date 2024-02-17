@@ -1,20 +1,26 @@
-import mongoose, { Model } from "mongoose";
-import { array } from "zod";
+import mongoose from "mongoose";
+
 export interface IItem {
+  tab_id: string;
   email: string;
   name: string;
   image: string;
   description: string;
   external_link: string;
   price: number;
+  type: string;
 }
 
 export interface IItemDocument extends IItem, Document {
   createdAt: Date;
   updatedAt: Date;
 }
-const itemSchema = new mongoose.Schema<IItemDocument>(
+export const itemSchema = new mongoose.Schema<IItemDocument>(
   {
+    tab_id: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -37,13 +43,12 @@ const itemSchema = new mongoose.Schema<IItemDocument>(
     price: {
       type: Number,
     },
+    type: {
+      type: String,
+      default: "image",
+    },
   },
   {
     timestamps: true,
   }
 );
-
-const Item: Model<IItemDocument> =
-  mongoose.models.Tab || mongoose.model("Tab", itemSchema);
-
-export default Item;
