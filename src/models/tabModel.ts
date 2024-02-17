@@ -20,6 +20,7 @@ const tabSchema = new mongoose.Schema<ITabDocument>(
     name: {
       type: String,
       required: true,
+      unique: true,
     },
     position: {
       type: Number,
@@ -36,7 +37,6 @@ const tabSchema = new mongoose.Schema<ITabDocument>(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     clicks: {
       type: Number,

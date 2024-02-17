@@ -1,11 +1,12 @@
 "use server";
-import { signIn } from "@/auth";
+import { auth, signIn } from "@/auth";
 import { z } from "zod";
 import { connectToMongoDB } from "./db";
 import User from "@/models/userModel";
-import { AuthError } from "next-auth";
+import { AuthError, Session } from "next-auth";
 import email from "next-auth/providers/email";
 import { error } from "console";
+import Tab from "@/models/tabModel";
 
 const schema = z.object({
   name: z
@@ -84,6 +85,35 @@ export const registerUser = async (prevState: any, formData: FormData) => {
   });
 };
 
+export const addTab = async (prevState: any, formData: FormData) => {
+  await connectToMongoDB();
+
+  const session = await auth();
+  const existName = await Tab.findOne({
+    name: formData.get("name"),
+  });
+
+  if (existName) {
+    return {
+      message: "fail",
+      errors: {
+        name: ["Tab Name already exists."],
+      },
+    };
+  }
+
+  const newTab = await Tab.create({
+    email: session?.user?.email,
+    name: formData.get("name"),
+    description: formData.get("description"),
+  });
+
+  await newTab.save();
+  return {
+    message: "Success",
+    error: [],
+  };
+};
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData
