@@ -21,11 +21,8 @@ const Tabs = async ({ session }: { session: Session | null }) => {
         <h1 className="text-xl font-bold mt-10 mb-5">Tabs</h1>
         <div className="flex flex-col gap-1 ">
           {tabs?.map((tab: ITabDocument) => (
-            <div>
-              <div
-                key={tab.name}
-                className=" border border-gray-200 rounded-md flex justify-between items-center p-3"
-              >
+            <div key={tab.name}>
+              <div className=" border border-gray-200 rounded-md flex justify-between items-center p-3">
                 <div className="flex flex-row items-center gap-5">
                   <DragIcon />
                   <div className="flex flex-col">
