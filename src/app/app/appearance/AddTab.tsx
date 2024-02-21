@@ -13,7 +13,9 @@ const AddTab = () => {
   const [active, setActive] = useState(false);
   const [state, formAction] = useFormState(addTab, {
     message: "",
-    error: [],
+    errors: {
+      name: [],
+    },
   });
   const router = useRouter();
   const form = useRef(null);

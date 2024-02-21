@@ -98,15 +98,38 @@ export const registerUser = async (prevState: any, formData: FormData) => {
 };
 
 export const addTab = async (prevState: any, formData: FormData) => {
-  await connectToMongoDB();
+  try {
+    await connectToMongoDB();
 
-  const session = await auth();
-  const existName = await Tab.findOne({
-    name: formData.get("name"),
-    email: session?.user?.email,
-  });
+    const session = await auth();
+    const existName = await Tab.findOne({
+      name: formData.get("name"),
+      email: session?.user?.email,
+    });
 
-  if (existName) {
+    if (existName) {
+      return {
+        message: "fail",
+        errors: {
+          name: ["Tab Name already exists."],
+        },
+      };
+    }
+
+    const newTab = await Tab.create({
+      email: session?.user?.email,
+      name: formData.get("name"),
+      description: formData.get("description"),
+    });
+
+    await newTab.save();
+    return {
+      message: "Success",
+      errors: {
+        name: [],
+      },
+    };
+  } catch (e) {
     return {
       message: "fail",
       errors: {
@@ -114,18 +137,6 @@ export const addTab = async (prevState: any, formData: FormData) => {
       },
     };
   }
-
-  const newTab = await Tab.create({
-    email: session?.user?.email,
-    name: formData.get("name"),
-    description: formData.get("description"),
-  });
-
-  await newTab.save();
-  return {
-    message: "Success",
-    error: [],
-  };
 };
 
 export async function AddItem(prevState: any, formData: FormData) {
