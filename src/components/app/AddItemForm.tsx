@@ -3,20 +3,26 @@ import useAddItemStore from "@/lib/store";
 import Image from "next/image";
 import { useState } from "react";
 import { useFormState } from "react-dom";
-
+import imageCompression from "browser-image-compression";
+import { any } from "zod";
 const AddItemForm = ({ tab_id }: { tab_id: any }) => {
-  // const [state,formAction] = useFormState();
   const { active, id } = useAddItemStore();
   const [image, setImage] = useState({
     image: "",
     id: id,
   });
   const handleImageChange = (e: any) => {
+    const options = {
+      maxSizeMB: 1.3, // Max size in MB
+      maxWidthOrHeight: 1920, // Max width/height
+      useWebWorker: true,
+    };
     const file = e.target.files && e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (event: any) => {
+      reader.onload = async (event: any) => {
         if (event.target) {
+          const compressedFile = await imageCompression(file, options);
           setImage((prev) => ({
             ...prev,
             image: event.target.result as string,

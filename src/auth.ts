@@ -40,10 +40,5 @@ export const { auth, signIn, signOut } = NextAuth({
     async jwt({ token }) {
       return token;
     },
-
-    async session({ session, token }) {
-      session.userId = token.sub as string;
-      return session;
-    },
   },
 });
