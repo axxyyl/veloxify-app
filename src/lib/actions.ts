@@ -103,6 +103,7 @@ export const addTab = async (prevState: any, formData: FormData) => {
   const session = await auth();
   const existName = await Tab.findOne({
     name: formData.get("name"),
+    email: session?.user?.email,
   });
 
   if (existName) {

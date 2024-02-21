@@ -15,6 +15,7 @@ export const { auth, signIn, signOut } = NextAuth({
 
         const found = await User.findOne({
           $or: [{ username: email }, { email: email }],
+          password
         });
 
         if (found) {
